@@ -1,0 +1,26 @@
+if game.PlaceId = 2753915549 then
+
+    local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+    local Window = OrionLib:MakeWindow({Name = "Stlex Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+    local WelcomeTab = Window:MakeTab({
+        Name = "Welcome",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
+    })
+
+    local information1Section = WelcomeTab:AddSection({
+        Name = "Update:"
+    })
+
+    information1Section:AddLabel("Update:")
+
+    local information2Section = WelcomeTab:AddSection({
+        Name = "Information"
+    })
+
+    information2Section:AddLabel("Owners:Pedro and Inumaki")
+    information2Section:AddLabel("Alpha")
+
+end
