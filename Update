@@ -1,24 +1,52 @@
-if game.PlaceId = 2753915549 then
+local Sea1, Sea2, Sea3 = game.PlaceId == 2753915549, game.PlaceId == 4442272183, game.PlaceId == 7449423635
 
-    local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+if Sea1 or Sea2 or Sea3 then
 
-    local Window = OrionLib:MakeWindow({Name = "Stlex Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+    -- Carregar OrionLib
+    local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
 
-    local WelcomeTab = Window:MakeTab({
-        Name = "Welcome",
+    -- Janela principal
+    local Window = OrionLib:MakeWindow({Name = "Pedro Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "Pedro2."})
+
+    -- Variáveis
+    _G.fastattack = false
+
+    local Fast = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+    local CameraShaker = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework.CameraShaker)
+    _G.fastattack = true
+
+    game:GetService("RunService").RenderStepped:Connect(function()
+        pcall(function()
+            if _G.fastattack then
+                Fast.activeController.timeToNextAttack = 0
+                Fast.activeController.hitboxMagnitude = 50
+                game:GetService('VirtualUser'):CaptureController()
+                game:GetService('VirtualUser'):Button1Down(Vector2.new(686, 352))
+                CameraShaker.CameraShakeInstance.CameraShakeState = {FadingIn = 3, FadingOut = 2, Sustained = 0, Inactive = 1}
+            end
+        end)
+    end)
+
+    local AutoFarmTab = Window:MakeTab({
+        Name = "Auto Farm",
         Icon = "rbxassetid://4483345998",
         PremiumOnly = false
     })
 
-    local information1Section = WelcomeTab:AddSection({
-        Name = "Update:"
+    local AutoFarmSection = AutoFarmTab:AddSection({
+        Name = "Auto Farm"
     })
 
-    information1Section:AddLabel("Update:")
-
-    local information2Section = WelcomeTab:AddSection({
-        Name = "Information"
+    AutoFarmSection:AddToggle({
+        Name = "Fast Attack",
+        Default = false,
+        Callback = function(Value)
+            _G.fastattack = Value
+            print(Value)
+        end    
     })
+
+end
 
     information2Section:AddLabel("Owners:Pedro and Inumaki")
     information2Section:AddLabel("Version:Alpha")
