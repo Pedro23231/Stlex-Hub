@@ -21,6 +21,6 @@ if game.PlaceId = 2753915549 then
     })
 
     information2Section:AddLabel("Owners:Pedro and Inumaki")
-    information2Section:AddLabel("Alpha")
+    information2Section:AddLabel("Version:Alpha")
 
 end
